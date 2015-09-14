@@ -23,6 +23,31 @@ public class Procesador {
                 + " residencia CHAR (50) NULL,"
                 + " PRIMARY_KEY carnet"
                 + " )");
+
+        // estos son los ddl commands
+        a_p.recibir_expresion("SET DATABASE universo");
+
+        a_p.recibir_expresion("ALTER TABLE universo");
+
+        a_p.recibir_expresion("ADD CONSTRAINT FOREING KEY ( nombre )");
+
+        a_p.recibir_expresion("REFERENCES estudiantes ( nombre )");
+
+        a_p.recibir_expresion("DROP TABLE estudiantes");
+
+        a_p.recibir_expresion("CREATE_INDEX sa ON estudiantes ( residencia )");
+        //**********************************************************************
+
+        //estos son los dml commands
+        a_p.recibir_expresion("SELECT * FROM estudiantes");
+
+        a_p.recibir_expresion("SELECT nombre, apellido FROM estudiantes WHERE estudiantes.nombre = will");
+
+        a_p.recibir_expresion("SELECT COUNT ( apellido ) FROM estudiantes WHERE estudinates.apellido = varela");
+
+        a_p.recibir_expresion("SELECT carnet FROM estudiantes INNER_JOIN cursos "
+                + "WHERE estudiantes.carnet = cursos.carnet GROUP_BY carnet");
+
     }
 
 }
