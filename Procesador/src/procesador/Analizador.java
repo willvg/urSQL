@@ -113,7 +113,7 @@ public class Analizador {
             }
 
         }
-        if (frase_columnas.get(frase_columnas.size() - 3).equals("PRIMARY_KEY")) {
+        if(frase_columnas.get(frase_columnas.size() - 3).equals("PRIMARY_KEY")){
             arreglo_columnas.add("si");
         } else {
             arreglo_columnas.add("no");
@@ -163,7 +163,7 @@ public class Analizador {
                 && frase_entrada.get(2).equals("FOREING")
                 && frase_entrada.get(3).equals("KEY")
                 && frase_entrada.get(4).equals("(")
-                && frase_entrada.get(6).equals(")")) {
+                && frase_entrada.get(6).equals(");")) {
             return true;
         } else {
             return false;
@@ -172,7 +172,7 @@ public class Analizador {
 
     public boolean Frase_referencia(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(2).equals("(")
-                && frase_entrada.get(4).equals(")")) {
+                && frase_entrada.get(4).equals(");")) {
             return true;
         } else {
             return false;
@@ -190,7 +190,7 @@ public class Analizador {
     public boolean Frase_index(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(2).equals("ON")
                 && frase_entrada.get(4).equals("(")
-                && frase_entrada.get(6).equals(")")) {
+                && frase_entrada.get(6).equals(");")) {
             return true;
         } else {
             return false;
@@ -276,5 +276,42 @@ public class Analizador {
             return false;
         }
     }
-
+    
+    public boolean Frase_update(ArrayList<String> frase_entrada){
+        boolean bandera = false;
+        if(frase_entrada.get(2).equals("SET")){
+            for (int i = 2; i < frase_entrada.size(); i++) {
+                if (frase_entrada.get(i).equals("WHERE")){
+                    bandera=true;
+                }
+            }
+            return bandera;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean Frase_delete(ArrayList<String> frase_entrada) {
+        if (frase_entrada.get(1).equals("FROM")
+                && frase_entrada.get(3).equals("WHERE")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean Frase_insert(ArrayList<String> frase_entrada){
+        boolean bandera = false;
+        if(frase_entrada.get(1).equals("INTO")){
+            for (int i = 2; i < frase_entrada.size(); i++) {
+                if (frase_entrada.get(i).equals("VALUES")){
+                    bandera=true;
+                }
+            }
+            return bandera;
+        }else{
+            return false;
+        }
+    }
+    
 }

@@ -64,6 +64,15 @@ public class Analizamiento_Procesamiento {
             case "SELECT":
                 Select(linea_tokenizada);
                 break;
+            case "UPDATE":
+                Update(linea_tokenizada);
+                break;
+            case "DELETE":
+                Delete(linea_tokenizada);
+                break;
+            case "INSERT":
+                Insert (linea_tokenizada);
+                break;
             default:
                 System.out.println("No se encuentra ese comando");
                 break;
@@ -141,6 +150,31 @@ public class Analizamiento_Procesamiento {
             System.out.println("exito en realizar la sentencia select");
         } else {
             System.out.println("mal en realizar la sentencia select");
+        } 
+    }
+    private void Update (ArrayList<String> linea_tokenizada){
+        boolean caso = analisis.Frase_update(linea_tokenizada);// cambiar
+        if (caso) {
+            System.out.println("exito en realizar la sentencia update");
+        } else {
+            System.out.println("mal en realizar la sentencia update");
+        } 
+    }
+    
+    private void Delete (ArrayList<String> linea_tokenizada){
+        boolean caso = analisis.Frase_delete(linea_tokenizada);// cambiar
+        if (caso) {
+            System.out.println("exito en realizar la sentencia delete");
+        } else {
+            System.out.println("mal en realizar la sentencia delete");
+        } 
+    }
+    private void Insert (ArrayList<String> linea_tokenizada){
+        boolean caso = analisis.Frase_insert(linea_tokenizada);// cambiar
+        if (caso) {
+            System.out.println("exito en realizar la sentencia delete");
+        } else {
+            System.out.println("mal en realizar la sentencia delete");
         } 
     }
 

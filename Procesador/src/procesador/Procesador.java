@@ -24,29 +24,41 @@ public class Procesador {
                 + " PRIMARY_KEY carnet"
                 + " )");
 
-        // estos son los ddl commands
+        // estos son los DDL commands
         a_p.recibir_expresion("SET DATABASE universo");
 
-        a_p.recibir_expresion("ALTER TABLE universo");
+        a_p.recibir_expresion("ALTER TABLE universo};");
 
-        a_p.recibir_expresion("ADD CONSTRAINT FOREING KEY ( nombre )");
+        a_p.recibir_expresion("ADD CONSTRAINT FOREING KEY ( nombre );");
 
-        a_p.recibir_expresion("REFERENCES estudiantes ( nombre )");
+        a_p.recibir_expresion("REFERENCES estudiantes ( nombre );");
 
-        a_p.recibir_expresion("DROP TABLE estudiantes");
+        a_p.recibir_expresion("DROP TABLE estudiantes;");
 
-        a_p.recibir_expresion("CREATE_INDEX sa ON estudiantes ( residencia )");
+        a_p.recibir_expresion("CREATE_INDEX sa ON estudiantes ( residencia );");
         //**********************************************************************
 
-        //estos son los dml commands
-        a_p.recibir_expresion("SELECT * FROM estudiantes");
+        //estos son los DML commands
+        a_p.recibir_expresion("SELECT * FROM estudiantes;");
 
-        a_p.recibir_expresion("SELECT nombre, apellido FROM estudiantes WHERE estudiantes.nombre = will");
+        a_p.recibir_expresion("SELECT nombre, apellido "
+                + "FROM estudiantes WHERE estudiantes.nombre = will;");
 
-        a_p.recibir_expresion("SELECT COUNT ( apellido ) FROM estudiantes WHERE estudinates.apellido = varela");
+        a_p.recibir_expresion("SELECT COUNT ( apellido ) "
+                + "FROM estudiantes WHERE estudinates.apellido = varela;");
 
-        a_p.recibir_expresion("SELECT carnet FROM estudiantes INNER_JOIN cursos "
-                + "WHERE estudiantes.carnet = cursos.carnet GROUP_BY carnet");
+        a_p.recibir_expresion("SELECT carnet FROM estudiantes INNER_JOIN cursos"
+                + " WHERE estudiantes.carnet = cursos.carnet GROUP_BY carnet;");
+        
+        a_p.recibir_expresion("UPDATE estudinates SET nombre = eduardo, "
+                + "apellido = guillen WHERE nombre = will;");
+        
+        a_p.recibir_expresion("DELETE FROM estudiantes WHERE nombre = juan;");
+        
+        a_p.recibir_expresion("INSERT INTO estudiantes ( nombre, carnet, "
+                + "apellido ) VALUES ( carlos, 2012456532, arias );");
+        //**********************************************************************
+
 
     }
 
