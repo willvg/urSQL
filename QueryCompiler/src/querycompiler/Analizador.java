@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package querycompiler;
 
-import static com.oracle.jrockit.jfr.DataType.INTEGER;
 import java.util.ArrayList;
 
 /**
  *
- * @author curso
+ * @author Will varela
  */
 public class Analizador {
 
+    //Comandos DDL//
+    
+    /**
+     * Método Frease_create_tabla lo que realiza es la validación de la 
+     * estrucura del comando y si viene correcto
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_create_tabla(ArrayList<String> frase_entrada) {
         int contador = 2;
         boolean caso = true;
         if (frase_entrada.get(contador).equals("AS") && frase_entrada.get(contador + 1).equals("(")) {
+            //valida si viene las palabras claves AS y el parentesis
             contador += 2;
             caso = Verifica_columnas(frase_entrada, contador);
         }
@@ -29,6 +33,13 @@ public class Analizador {
         }
     }
 
+    /**
+     * el método Verifica_columnas lo que realiza es toda la validación de las 
+     * columnas en el create table.
+     * @param frase_columnas
+     * @param contador
+     * @return 
+     */
     private boolean Verifica_columnas(ArrayList<String> frase_columnas, int contador) {
         String retornar = "";
 
@@ -125,7 +136,6 @@ public class Analizador {
             arreglo_columnas.add("no");
         }
 
-        //******************************************
         String fal = "";
         for (int i = 0; i < arreglo_columnas.size(); i++) {
             if (arreglo_columnas.get(i).equals("no")) {
@@ -140,8 +150,13 @@ public class Analizador {
         }
     }
 
-    //********************************************
-    //setdabase
+    
+    /**
+     * El método Frase_set_dabase se encarga de la validación del comando 
+     * SET_dabase
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_set_dabase(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(1).equals("DATABASE")) {
             return true;
@@ -150,6 +165,11 @@ public class Analizador {
         }
     }
 
+    /**
+     * FRase_alter valida la estructura del comando ALTER
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_alter(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(1).equals("TABLE")) {
             return true;
@@ -158,6 +178,12 @@ public class Analizador {
         }
     }
 
+    /**
+     * Frase_add lo que realiza es la validación de la estructura del comando 
+     * ADD CONSTRAINT
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_add(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(1).equals("CONSTRAINT")
                 && frase_entrada.get(2).equals("FOREING")
@@ -170,6 +196,11 @@ public class Analizador {
         }
     }
 
+    /**
+     * Frase_referencia valida la estructura del comando REFERENCES
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_referencia(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(2).equals("(")
                 && frase_entrada.get(4).equals(");")) {
@@ -179,6 +210,11 @@ public class Analizador {
         }
     }
 
+    /**
+     * Frase_drop validala estructura del comando DROP TABLE
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_drop(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(1).equals("TABLE")) {
             return true;
@@ -187,6 +223,12 @@ public class Analizador {
         }
     }
 
+    /**
+     * Frase_index valida la estructura del comando a ingresar que es 
+     * CREATE INDEX
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_index(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(2).equals("ON")
                 && frase_entrada.get(4).equals("(")
@@ -197,6 +239,15 @@ public class Analizador {
         }
     }
 
+    
+    //Comando DML//
+    
+    /**
+     * For_where lo que realiza es que valida si se encuentra un INNER JOIN 
+     * en la sentencia del SELECT
+     * @param frase_entrada
+     * @return temporal
+     */
     private int for_where(ArrayList<String> frase_entrada) {
         int temporal = 0;
         for (int j = 0; j < frase_entrada.size(); j++) {
@@ -212,16 +263,22 @@ public class Analizador {
         return temporal;
     }
 
+    /**
+     * Frase_select valida la estructura del comando SELECT
+     * @param frase_entrada
+     * @return boolean
+     */
     public boolean Frase_select(ArrayList<String> frase_entrada) {
         ArrayList<Integer> arreglo_contador = new ArrayList<Integer>();
-        boolean bandera_join = false;
-        boolean bandera_where = false;
-        boolean bandera_group_by = false;
-        boolean bandera_else = false;
-        if (frase_entrada.get(1).equals("*")
+        boolean bandera_join = false;          //variable por si se encuentra un join
+        boolean bandera_where = false;         //variable por si se encuentra un where
+        boolean bandera_group_by = false;      //variable por si se encuentra un group_by
+        boolean bandera_else = false;          //variable por si se encuentra no se piden todas las columnas
+        if (frase_entrada.get(1).equals("*")   // si se piden todas las columnas de la tabla
                 && frase_entrada.get(2).equals("FROM")) {
             return true;
-        } else {
+        } else {                              //si se piden columnas especificas y valida si vienen palabras reservasdas 
+                                              //o no vienen en el camando
             bandera_else = true;
             for (int i = 0; i < frase_entrada.size(); i++) {
                 if (frase_entrada.get(i).equals("FROM")) {
@@ -261,7 +318,7 @@ public class Analizador {
             }
         }
         boolean respuesta = false;
-        if (bandera_else == true) {
+        if (bandera_else == true) {    // valida si se pidieron columnas especificas pero que ya se haya validado el comando 
             for (int i = 0; i < arreglo_contador.size(); i++) {
                 if (arreglo_contador.get(i) == (i + 1)) {
                     respuesta = true;
@@ -277,6 +334,11 @@ public class Analizador {
         }
     }
     
+    /**
+     * Frase_update realiza la validación de la estructura del comando UPDATE
+     * @param frase_entrada
+     * @return 
+     */
     public boolean Frase_update(ArrayList<String> frase_entrada){
         boolean bandera = false;
         if(frase_entrada.get(2).equals("SET")){
@@ -291,6 +353,11 @@ public class Analizador {
         }
     }
     
+    /**
+     * Frase_delete realiza la validación de la estructura del comando DELETE
+     * @param frase_entrada
+     * @return 
+     */
     public boolean Frase_delete(ArrayList<String> frase_entrada) {
         if (frase_entrada.get(1).equals("FROM")
                 && frase_entrada.get(3).equals("WHERE")) {
@@ -300,6 +367,11 @@ public class Analizador {
         }
     }
     
+    /**
+     * Frase_insert realiza la validación de la estructura del comando INSERT
+     * @param frase_entrada
+     * @return 
+     */
     public boolean Frase_insert(ArrayList<String> frase_entrada){
         boolean bandera = false;
         if(frase_entrada.get(1).equals("INTO")){
