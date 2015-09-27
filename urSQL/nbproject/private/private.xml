@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/systemcatalog/SystemCatalog.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ConversorDeSelect.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ProcesadorComandosCLP.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ursql/UrSQL.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/querycompiler/Analizamiento_Procesamiento.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/querycompiler/Analizador.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/systemcatalog/TablaEsquemas.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/querycompiler/QueryCompiler.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ConversorDeInsert.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/querycompiler/Protocolo.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ProcesadorComandosDML.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ProcesadorComandosDDL.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/systemcatalog/TablaTablas.java</file>
+            <file>file:/C:/Users/AndresMaria/Documents/NetBeansProjects/urSQL/src/ExecutorEngine/ConversorDeUpdate.java</file>
+        </group>
+    </open-files>
+</project-private>
